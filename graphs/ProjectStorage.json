@@ -1,0 +1,503 @@
+{
+    "properties": {
+        "name": "ProjectStorage",
+        "environment": {}
+    },
+    "inports": {
+        "db": {
+            "process": "SplitDb",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "in": {
+            "process": "Dispatch",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "context": {
+            "process": "MergeContext",
+            "port": "out",
+            "metadata": {
+                "x": 1440,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 324,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "Loading": {
+            "component": "ui/CreateLoadingContext",
+            "metadata": {
+                "x": 612,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "Loading"
+            }
+        },
+        "MergeContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 1332,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContext"
+            }
+        },
+        "ShowErrors": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 468,
+                "y": 540,
+                "width": 72,
+                "height": 72,
+                "label": "ShowErrors"
+            }
+        },
+        "SplitDb": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 180,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "SplitDb"
+            }
+        },
+        "LoadData": {
+            "component": "ui/LoadProjectData",
+            "metadata": {
+                "x": 324,
+                "y": 540,
+                "width": 72,
+                "height": 72,
+                "label": "LoadData"
+            }
+        },
+        "CreateDbCtx": {
+            "component": "objects/CreateObject",
+            "metadata": {
+                "x": 324,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "CreateDbCtx"
+            }
+        },
+        "SetDb": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 468,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "SetDb"
+            }
+        },
+        "CreateProjectsCtx": {
+            "component": "objects/CreateObject",
+            "metadata": {
+                "x": 324,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "CreateProjectsCtx"
+            }
+        },
+        "SetProjects": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 468,
+                "y": 720,
+                "width": 72,
+                "height": 72,
+                "label": "SetProjects"
+            }
+        },
+        "PopulateProjectData": {
+            "component": "ui/PopulateProjectData",
+            "metadata": {
+                "x": 468,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "PopulateProjectData"
+            }
+        },
+        "ListenGraph": {
+            "component": "graph/ListenChanges",
+            "metadata": {
+                "x": 612,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "ListenGraph"
+            }
+        },
+        "SetGraphGroup": {
+            "component": "groups/Group",
+            "metadata": {
+                "x": 864,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "SetGraphGroup"
+            }
+        },
+        "Disc": {
+            "component": "core/DisconnectAfterPacket",
+            "metadata": {
+                "x": 720,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "Disc"
+            }
+        },
+        "SetChanged": {
+            "component": "ui/SetGraphChanged",
+            "metadata": {
+                "x": 1008,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "SetChanged"
+            }
+        },
+        "Save": {
+            "component": "ui/Save",
+            "metadata": {
+                "x": 1152,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "Save"
+            }
+        },
+        "Delete": {
+            "component": "ui/Delete",
+            "metadata": {
+                "x": 468,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "Delete"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "route"
+            },
+            "tgt": {
+                "process": "Loading",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "Loading",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "missed"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "LoadData",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateDbCtx",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateDbCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetDb",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetDb",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "SetDb",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateProjectsCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetProjects",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadData",
+                "port": "projects"
+            },
+            "tgt": {
+                "process": "SetProjects",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "SetProjects",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadData",
+                "port": "projects"
+            },
+            "tgt": {
+                "process": "PopulateProjectData",
+                "port": "projects"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "PopulateProjectData",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "PopulateProjectData",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "PopulateProjectData",
+                "port": "currentgraph"
+            },
+            "tgt": {
+                "process": "ListenGraph",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenGraph",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Disc",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Disc",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetGraphGroup",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SetGraphGroup",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetChanged",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SetChanged",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Save",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Save",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "Save",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Save",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Delete",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "Delete",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadData",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "data": "open,save,delete",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "db",
+            "tgt": {
+                "process": "SetDb",
+                "port": "key"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "CreateProjectsCtx",
+                "port": "start"
+            }
+        },
+        {
+            "data": "projects",
+            "tgt": {
+                "process": "SetProjects",
+                "port": "key"
+            }
+        },
+        {
+            "data": "graph",
+            "tgt": {
+                "process": "SetGraphGroup",
+                "port": "group"
+            }
+        }
+    ]
+}

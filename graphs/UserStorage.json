@@ -1,0 +1,396 @@
+{
+    "properties": {
+        "name": "UserStorage",
+        "environment": {}
+    },
+    "inports": {
+        "in": {
+            "process": "Dispatch",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "start": {
+            "process": "LoadUser",
+            "port": "start",
+            "metadata": {
+                "x": 36,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "user": {
+            "process": "Merge",
+            "port": "out",
+            "metadata": {
+                "x": 864,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 180,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "LoadUser": {
+            "component": "ui/LoadUserData",
+            "metadata": {
+                "x": 432,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "LoadUser"
+            }
+        },
+        "Merge": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 720,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "Merge"
+            }
+        },
+        "Reset": {
+            "component": "ui/ClearUserData",
+            "metadata": {
+                "x": 576,
+                "y": 72,
+                "width": 72,
+                "height": 72,
+                "label": "Reset"
+            }
+        },
+        "Login": {
+            "component": "ui/RemoteLogin",
+            "metadata": {
+                "x": 324,
+                "y": 288,
+                "width": 72,
+                "height": 72,
+                "label": "Login"
+            }
+        },
+        "GetRemoteUser": {
+            "component": "ui/GetRemoteUser",
+            "metadata": {
+                "x": 432,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "GetRemoteUser"
+            }
+        },
+        "StoreUser": {
+            "component": "ui/StoreUser",
+            "metadata": {
+                "x": 576,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "StoreUser"
+            }
+        },
+        "Show": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 576,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "Show"
+            }
+        },
+        "ProLogin": {
+            "component": "ui/RemoteLogin",
+            "metadata": {
+                "x": 324,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "ProLogin"
+            }
+        },
+        "ProGetRemoteUser": {
+            "component": "ui/GetRemoteUser",
+            "metadata": {
+                "x": 432,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "ProGetRemoteUser"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "LoadUser",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "Merge",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadUser",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Reset",
+                "port": "clear"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "Login",
+                "port": "login"
+            }
+        },
+        {
+            "src": {
+                "process": "Login",
+                "port": "token"
+            },
+            "tgt": {
+                "process": "GetRemoteUser",
+                "port": "token"
+            }
+        },
+        {
+            "src": {
+                "process": "GetRemoteUser",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "StoreUser",
+                "port": "user"
+            }
+        },
+        {
+            "src": {
+                "process": "StoreUser",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "Merge",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Login",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Show",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "GetRemoteUser",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Show",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "ProLogin",
+                "port": "login"
+            }
+        },
+        {
+            "src": {
+                "process": "ProLogin",
+                "port": "token"
+            },
+            "tgt": {
+                "process": "ProGetRemoteUser",
+                "port": "token"
+            }
+        },
+        {
+            "src": {
+                "process": "ProGetRemoteUser",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "StoreUser",
+                "port": "user"
+            }
+        },
+        {
+            "src": {
+                "process": "ProLogin",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Show",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ProGetRemoteUser",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Show",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "Reset",
+                "port": "clear"
+            }
+        },
+        {
+            "src": {
+                "process": "Reset",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "Merge",
+                "port": "in"
+            }
+        },
+        {
+            "data": "loginFree,loginPro,logout",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_PROVIDER",
+            "tgt": {
+                "process": "Login",
+                "port": "site"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_SERVICE_USER",
+            "tgt": {
+                "process": "GetRemoteUser",
+                "port": "site"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_GATE",
+            "tgt": {
+                "process": "Login",
+                "port": "gatekeeper"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_CLIENT_ID",
+            "tgt": {
+                "process": "Login",
+                "port": "clientid"
+            }
+        },
+        {
+            "data": "github_public",
+            "tgt": {
+                "process": "Login",
+                "port": "provider"
+            }
+        },
+        {
+            "data": "github",
+            "tgt": {
+                "process": "Login",
+                "port": "scope"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "Login",
+                "port": "check"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_PROVIDER",
+            "tgt": {
+                "process": "ProLogin",
+                "port": "site"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_SERVICE_USER",
+            "tgt": {
+                "process": "ProGetRemoteUser",
+                "port": "site"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_GATE",
+            "tgt": {
+                "process": "ProLogin",
+                "port": "gatekeeper"
+            }
+        },
+        {
+            "data": "$NOFLO_OAUTH_CLIENT_ID",
+            "tgt": {
+                "process": "ProLogin",
+                "port": "clientid"
+            }
+        },
+        {
+            "data": "github_private",
+            "tgt": {
+                "process": "ProLogin",
+                "port": "provider"
+            }
+        },
+        {
+            "data": "github",
+            "tgt": {
+                "process": "ProLogin",
+                "port": "scope"
+            }
+        }
+    ]
+}

@@ -1,0 +1,494 @@
+{
+    "properties": {
+        "name": "PrepareStorage",
+        "environment": {}
+    },
+    "inports": {
+        "name": {
+            "process": "Open",
+            "port": "name",
+            "metadata": {
+                "x": 36,
+                "y": 576,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "error": {
+            "process": "Errors",
+            "port": "out",
+            "metadata": {
+                "x": 1188,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "db": {
+            "process": "Open",
+            "port": "db",
+            "metadata": {
+                "x": 1188,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Open": {
+            "component": "indexeddb/Open",
+            "metadata": {
+                "x": 144,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "Open"
+            }
+        },
+        "Errors": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 1080,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "Errors"
+            }
+        },
+        "Upgrade": {
+            "component": "indexeddb/UpgradeRouter",
+            "metadata": {
+                "x": 324,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "Upgrade"
+            }
+        },
+        "CreateProjects": {
+            "component": "indexeddb/CreateStore",
+            "metadata": {
+                "x": 504,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "CreateProjects"
+            }
+        },
+        "CreateGraphs": {
+            "component": "indexeddb/CreateStore",
+            "metadata": {
+                "x": 648,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "CreateGraphs"
+            }
+        },
+        "GraphProject": {
+            "component": "indexeddb/CreateIndex",
+            "metadata": {
+                "x": 792,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "GraphProject"
+            }
+        },
+        "Migrate": {
+            "component": "ui/MigrateLocalStorage",
+            "metadata": {
+                "x": 936,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "Migrate"
+            }
+        },
+        "CreateComponents": {
+            "component": "indexeddb/CreateStore",
+            "metadata": {
+                "x": 792,
+                "y": 504,
+                "width": 72,
+                "height": 72,
+                "label": "CreateComponents"
+            }
+        },
+        "ComponentProject": {
+            "component": "indexeddb/CreateIndex",
+            "metadata": {
+                "x": 936,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "ComponentProject"
+            }
+        },
+        "CreateRuntimes": {
+            "component": "indexeddb/CreateStore",
+            "metadata": {
+                "x": 648,
+                "y": 540,
+                "width": 72,
+                "height": 72,
+                "label": "CreateRuntimes"
+            }
+        },
+        "CreateJournals": {
+            "component": "indexeddb/CreateStore",
+            "metadata": {
+                "x": 792,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "CreateJournals"
+            }
+        },
+        "JournalGraph": {
+            "component": "indexeddb/CreateIndex",
+            "metadata": {
+                "x": 936,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "JournalGraph"
+            }
+        },
+        "DatabaseReady": {
+            "component": "ui/DatabaseReady",
+            "metadata": {
+                "x": 324,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "DatabaseReady"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Open",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Open",
+                "port": "upgrade"
+            },
+            "tgt": {
+                "process": "Upgrade",
+                "port": "upgrade"
+            }
+        },
+        {
+            "src": {
+                "process": "Upgrade",
+                "port": "versions"
+            },
+            "tgt": {
+                "process": "CreateProjects",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateProjects",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateProjects",
+                "port": "db"
+            },
+            "tgt": {
+                "process": "CreateGraphs",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateGraphs",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateGraphs",
+                "port": "store"
+            },
+            "tgt": {
+                "process": "GraphProject",
+                "port": "store"
+            }
+        },
+        {
+            "src": {
+                "process": "GraphProject",
+                "port": "store"
+            },
+            "tgt": {
+                "process": "Migrate",
+                "port": "graphstore"
+            }
+        },
+        {
+            "src": {
+                "process": "GraphProject",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateGraphs",
+                "port": "db"
+            },
+            "tgt": {
+                "process": "CreateComponents",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateComponents",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateComponents",
+                "port": "store"
+            },
+            "tgt": {
+                "process": "ComponentProject",
+                "port": "store"
+            }
+        },
+        {
+            "src": {
+                "process": "ComponentProject",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Upgrade",
+                "port": "versions"
+            },
+            "tgt": {
+                "process": "CreateRuntimes",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateRuntimes",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Upgrade",
+                "port": "versions"
+            },
+            "tgt": {
+                "process": "CreateJournals",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateJournals",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateJournals",
+                "port": "store"
+            },
+            "tgt": {
+                "process": "JournalGraph",
+                "port": "store"
+            }
+        },
+        {
+            "src": {
+                "process": "JournalGraph",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Errors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Open",
+                "port": "db"
+            },
+            "tgt": {
+                "process": "DatabaseReady",
+                "port": "in"
+            }
+        },
+        {
+            "data": "3",
+            "tgt": {
+                "process": "Open",
+                "port": "version"
+            }
+        },
+        {
+            "data": "projects",
+            "tgt": {
+                "process": "CreateProjects",
+                "port": "name"
+            }
+        },
+        {
+            "data": "id",
+            "tgt": {
+                "process": "CreateProjects",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "graphs",
+            "tgt": {
+                "process": "CreateGraphs",
+                "port": "name"
+            }
+        },
+        {
+            "data": "id",
+            "tgt": {
+                "process": "CreateGraphs",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "project",
+            "tgt": {
+                "process": "GraphProject",
+                "port": "name"
+            }
+        },
+        {
+            "data": "project",
+            "tgt": {
+                "process": "GraphProject",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "components",
+            "tgt": {
+                "process": "CreateComponents",
+                "port": "name"
+            }
+        },
+        {
+            "data": "id",
+            "tgt": {
+                "process": "CreateComponents",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "project",
+            "tgt": {
+                "process": "ComponentProject",
+                "port": "name"
+            }
+        },
+        {
+            "data": "project",
+            "tgt": {
+                "process": "ComponentProject",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "runtimes",
+            "tgt": {
+                "process": "CreateRuntimes",
+                "port": "name"
+            }
+        },
+        {
+            "data": "id",
+            "tgt": {
+                "process": "CreateRuntimes",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "journals",
+            "tgt": {
+                "process": "CreateJournals",
+                "port": "name"
+            }
+        },
+        {
+            "data": "id",
+            "tgt": {
+                "process": "CreateJournals",
+                "port": "keypath"
+            }
+        },
+        {
+            "data": "graph",
+            "tgt": {
+                "process": "JournalGraph",
+                "port": "name"
+            }
+        },
+        {
+            "data": "graph",
+            "tgt": {
+                "process": "JournalGraph",
+                "port": "keypath"
+            }
+        }
+    ]
+}

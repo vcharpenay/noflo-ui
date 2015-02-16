@@ -1,0 +1,680 @@
+{
+    "properties": {
+        "name": "RuntimeStorage",
+        "environment": {}
+    },
+    "inports": {
+        "db": {
+            "process": "LoadData",
+            "port": "db",
+            "metadata": {
+                "x": 36,
+                "y": 828,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "in": {
+            "process": "Dispatch",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "context": {
+            "process": "FindRuntimes",
+            "port": "context",
+            "metadata": {
+                "x": 36,
+                "y": 648,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "context": {
+            "process": "MergeContext",
+            "port": "out",
+            "metadata": {
+                "x": 1512,
+                "y": 684,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 288,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "Loading": {
+            "component": "ui/CreateLoadingContext",
+            "metadata": {
+                "x": 576,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "Loading"
+            }
+        },
+        "MergeContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 1368,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContext"
+            }
+        },
+        "ShowErrors": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 900,
+                "y": 540,
+                "width": 72,
+                "height": 72,
+                "label": "ShowErrors"
+            }
+        },
+        "CreateRuntimesCtx": {
+            "component": "objects/CreateObject",
+            "metadata": {
+                "x": 288,
+                "y": 756,
+                "width": 72,
+                "height": 72,
+                "label": "CreateRuntimesCtx"
+            }
+        },
+        "SetRuntimes": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 432,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "SetRuntimes"
+            }
+        },
+        "LoadData": {
+            "component": "ui/LoadRuntimeData",
+            "metadata": {
+                "x": 180,
+                "y": 684,
+                "width": 72,
+                "height": 72,
+                "label": "LoadData"
+            }
+        },
+        "EnsureLocal": {
+            "component": "ui/EnsureLocalRuntimes",
+            "metadata": {
+                "x": 288,
+                "y": 540,
+                "width": 72,
+                "height": 72,
+                "label": "EnsureLocal"
+            }
+        },
+        "ProjectRuntime": {
+            "component": "ui/ProjectRuntime",
+            "metadata": {
+                "x": 576,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "ProjectRuntime"
+            }
+        },
+        "FindRuntimes": {
+            "component": "ui/FindRuntimes",
+            "metadata": {
+                "x": 432,
+                "y": 504,
+                "width": 72,
+                "height": 72,
+                "label": "FindRuntimes"
+            }
+        },
+        "MergeContextPreSubscribe": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 756,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContextPreSubscribe"
+            }
+        },
+        "PopulateRuntimeData": {
+            "component": "ui/PopulateRuntimeData",
+            "metadata": {
+                "x": 432,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "PopulateRuntimeData"
+            }
+        },
+        "DirectRuntime": {
+            "component": "ui/DirectRuntime",
+            "metadata": {
+                "x": 576,
+                "y": 432,
+                "width": 72,
+                "height": 72,
+                "label": "DirectRuntime"
+            }
+        },
+        "ListComponents": {
+            "component": "runtime/ListComponents",
+            "metadata": {
+                "x": 756,
+                "y": 612,
+                "width": 72,
+                "height": 72,
+                "label": "ListComponents"
+            }
+        },
+        "SubscribeGraph": {
+            "component": "ui/SubscribeGraph",
+            "metadata": {
+                "x": 900,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "SubscribeGraph"
+            }
+        },
+        "SendGraph": {
+            "component": "runtime/SendGraphChanges",
+            "metadata": {
+                "x": 1044,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "SendGraph"
+            }
+        },
+        "ListenNetwork": {
+            "component": "runtime/ListenNetwork",
+            "metadata": {
+                "x": 1044,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "ListenNetwork"
+            }
+        },
+        "PacketToContext": {
+            "component": "ui/PacketToContext",
+            "metadata": {
+                "x": 1188,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "PacketToContext"
+            }
+        },
+        "ListenProcessErrors": {
+            "component": "runtime/ListenProcessErrors",
+            "metadata": {
+                "x": 1044,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "ListenProcessErrors"
+            }
+        },
+        "ProcessErrorToContext": {
+            "component": "ui/ProcessErrorToContext",
+            "metadata": {
+                "x": 1188,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "ProcessErrorToContext"
+            }
+        },
+        "SendNewGraph": {
+            "component": "runtime/SendGraph",
+            "metadata": {
+                "x": 756,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "SendNewGraph"
+            }
+        },
+        "SendNewComponent": {
+            "component": "runtime/SendComponent",
+            "metadata": {
+                "x": 756,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "SendNewComponent"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "route"
+            },
+            "tgt": {
+                "process": "Loading",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "Loading",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "missed"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateRuntimesCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetRuntimes",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadData",
+                "port": "runtimes"
+            },
+            "tgt": {
+                "process": "EnsureLocal",
+                "port": "runtimes"
+            }
+        },
+        {
+            "src": {
+                "process": "EnsureLocal",
+                "port": "runtimes"
+            },
+            "tgt": {
+                "process": "SetRuntimes",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "SetRuntimes",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "ProjectRuntime",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "EnsureLocal",
+                "port": "runtimes"
+            },
+            "tgt": {
+                "process": "FindRuntimes",
+                "port": "runtimes"
+            }
+        },
+        {
+            "src": {
+                "process": "FindRuntimes",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "ProjectRuntime",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectRuntime",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContextPreSubscribe",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "EnsureLocal",
+                "port": "runtimes"
+            },
+            "tgt": {
+                "process": "PopulateRuntimeData",
+                "port": "runtimes"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "PopulateRuntimeData",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "PopulateRuntimeData",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "DirectRuntime",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "DirectRuntime",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContextPreSubscribe",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "ListComponents",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "DirectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "ListComponents",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "ListComponents",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ListComponents",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "MergeContextPreSubscribe",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SubscribeGraph",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "SendGraph",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "graph"
+            },
+            "tgt": {
+                "process": "SendGraph",
+                "port": "graph"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "ListenNetwork",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "graph"
+            },
+            "tgt": {
+                "process": "ListenNetwork",
+                "port": "graph"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenNetwork",
+                "port": "packet"
+            },
+            "tgt": {
+                "process": "PacketToContext",
+                "port": "packet"
+            }
+        },
+        {
+            "src": {
+                "process": "PacketToContext",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SubscribeGraph",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "ListenProcessErrors",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenProcessErrors",
+                "port": "process"
+            },
+            "tgt": {
+                "process": "ProcessErrorToContext",
+                "port": "process"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenProcessErrors",
+                "port": "message"
+            },
+            "tgt": {
+                "process": "ProcessErrorToContext",
+                "port": "message"
+            }
+        },
+        {
+            "src": {
+                "process": "ProcessErrorToContext",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "SendNewGraph",
+                "port": "graph"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "SendNewGraph",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "DirectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "SendNewGraph",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 3
+            },
+            "tgt": {
+                "process": "SendNewComponent",
+                "port": "component"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "SendNewComponent",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "DirectRuntime",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "SendNewComponent",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "LoadData",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "data": "open,connect,sendGraph,sendComponent",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "CreateRuntimesCtx",
+                "port": "start"
+            }
+        },
+        {
+            "data": "runtimes",
+            "tgt": {
+                "process": "SetRuntimes",
+                "port": "key"
+            }
+        }
+    ]
+}

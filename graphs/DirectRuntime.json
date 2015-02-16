@@ -1,0 +1,447 @@
+{
+    "properties": {
+        "name": "DirectRuntime",
+        "environment": {}
+    },
+    "inports": {
+        "context": {
+            "process": "HoldConnection",
+            "port": "context",
+            "metadata": {
+                "x": 36,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "context": {
+            "process": "MergeContext",
+            "port": "out",
+            "metadata": {
+                "x": 1440,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "runtime": {
+            "process": "Connect",
+            "port": "connected",
+            "metadata": {
+                "x": 1440,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "HoldConnection": {
+            "component": "ui/HoldRuntimeConnection",
+            "metadata": {
+                "x": 144,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "HoldConnection"
+            }
+        },
+        "ConnectedContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 756,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "ConnectedContext"
+            }
+        },
+        "GetDefinition": {
+            "component": "objects/GetObjectKey",
+            "metadata": {
+                "x": 324,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "GetDefinition"
+            }
+        },
+        "Connect": {
+            "component": "runtime/ConnectRuntime",
+            "metadata": {
+                "x": 468,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "Connect"
+            }
+        },
+        "GetParent": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "x": 324,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "GetParent"
+            }
+        },
+        "AddRuntime": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 612,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "AddRuntime"
+            }
+        },
+        "GetGraph": {
+            "component": "ui/GetRuntimeGraph",
+            "metadata": {
+                "x": 864,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "GetGraph"
+            }
+        },
+        "Collect": {
+            "component": "ui/CollectRemoteNodes",
+            "metadata": {
+                "x": 1008,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "Collect"
+            }
+        },
+        "GetSource": {
+            "component": "runtime/GetSource",
+            "metadata": {
+                "x": 1152,
+                "y": 72,
+                "width": 72,
+                "height": 72,
+                "label": "GetSource"
+            }
+        },
+        "MergeContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 1296,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContext"
+            }
+        },
+        "EnableDebug": {
+            "component": "ui/ContextToDebug",
+            "metadata": {
+                "x": 1152,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "EnableDebug"
+            }
+        },
+        "ErrorToCtx": {
+            "component": "ui/ErrorToContext",
+            "metadata": {
+                "x": 1152,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "ErrorToCtx"
+            }
+        },
+        "SendUnavailable": {
+            "component": "strings/SendString",
+            "metadata": {
+                "x": 756,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "SendUnavailable"
+            }
+        },
+        "CreateError": {
+            "component": "objects/CreateError",
+            "metadata": {
+                "x": 864,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "CreateError"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "HoldConnection",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "ConnectedContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "HoldConnection",
+                "port": "connect"
+            },
+            "tgt": {
+                "process": "GetDefinition",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "GetDefinition",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Connect",
+                "port": "definition"
+            }
+        },
+        {
+            "src": {
+                "process": "GetParent",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "Connect",
+                "port": "element"
+            }
+        },
+        {
+            "src": {
+                "process": "GetDefinition",
+                "port": "object"
+            },
+            "tgt": {
+                "process": "AddRuntime",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "Connect",
+                "port": "connected"
+            },
+            "tgt": {
+                "process": "AddRuntime",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "Connect",
+                "port": "connected"
+            },
+            "tgt": {
+                "process": "HoldConnection",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "AddRuntime",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "ConnectedContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ConnectedContext",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GetGraph",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "GetGraph",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "Collect",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "Collect",
+                "port": "runtime"
+            },
+            "tgt": {
+                "process": "GetSource",
+                "port": "runtime"
+            }
+        },
+        {
+            "src": {
+                "process": "Collect",
+                "port": "component"
+            },
+            "tgt": {
+                "process": "GetSource",
+                "port": "name"
+            }
+        },
+        {
+            "src": {
+                "process": "GetSource",
+                "port": "source"
+            },
+            "tgt": {
+                "process": "Collect",
+                "port": "component"
+            }
+        },
+        {
+            "src": {
+                "process": "GetSource",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "Collect",
+                "port": "error"
+            }
+        },
+        {
+            "src": {
+                "process": "Collect",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Collect",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "EnableDebug",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "Connect",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ErrorToCtx",
+                "port": "error"
+            }
+        },
+        {
+            "src": {
+                "process": "Collect",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ErrorToCtx",
+                "port": "error"
+            }
+        },
+        {
+            "src": {
+                "process": "Connect",
+                "port": "unavailable"
+            },
+            "tgt": {
+                "process": "SendUnavailable",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SendUnavailable",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateError",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateError",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "ErrorToCtx",
+                "port": "error"
+            }
+        },
+        {
+            "src": {
+                "process": "ErrorToCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "data": "false",
+            "tgt": {
+                "process": "HoldConnection",
+                "port": "requiregraphs"
+            }
+        },
+        {
+            "data": "runtime",
+            "tgt": {
+                "process": "GetDefinition",
+                "port": "key"
+            }
+        },
+        {
+            "data": "20000",
+            "tgt": {
+                "process": "Connect",
+                "port": "timeout"
+            }
+        },
+        {
+            "data": "body",
+            "tgt": {
+                "process": "GetParent",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "runtime",
+            "tgt": {
+                "process": "AddRuntime",
+                "port": "key"
+            }
+        },
+        {
+            "data": "Runtime not available",
+            "tgt": {
+                "process": "SendUnavailable",
+                "port": "string"
+            }
+        }
+    ]
+}

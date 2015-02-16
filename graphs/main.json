@@ -1,0 +1,444 @@
+{
+    "properties": {
+        "name": "main",
+        "environment": {}
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {
+        "PrepareStorage": {
+            "component": "ui/PrepareStorage",
+            "metadata": {
+                "x": 576,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "PrepareStorage"
+            }
+        },
+        "ProjectStorage": {
+            "component": "ui/ProjectStorage",
+            "metadata": {
+                "x": 720,
+                "y": 72,
+                "width": 72,
+                "height": 72,
+                "label": "ProjectStorage"
+            }
+        },
+        "RuntimeStorage": {
+            "component": "ui/RuntimeStorage",
+            "metadata": {
+                "x": 864,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "RuntimeStorage"
+            }
+        },
+        "AppView": {
+            "component": "polymer/noflo-ui",
+            "metadata": {
+                "x": 1008,
+                "y": 288,
+                "width": 72,
+                "height": 72,
+                "label": "AppView"
+            }
+        },
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 288,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "UserStorage": {
+            "component": "ui/UserStorage",
+            "metadata": {
+                "x": 432,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "UserStorage"
+            }
+        },
+        "MainContext": {
+            "component": "ui/CreateContext",
+            "metadata": {
+                "x": 720,
+                "y": 288,
+                "width": 72,
+                "height": 72,
+                "label": "MainContext"
+            }
+        },
+        "GithubStorage": {
+            "component": "ui/GithubStorage",
+            "metadata": {
+                "x": 576,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "GithubStorage"
+            }
+        },
+        "ContextStorage": {
+            "component": "ui/ContextStorage",
+            "metadata": {
+                "x": 576,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "ContextStorage"
+            }
+        },
+        "ShowErrors": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 432,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "ShowErrors"
+            }
+        },
+        "ListenHash": {
+            "component": "interaction/ListenHash",
+            "metadata": {
+                "x": 36,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "ListenHash"
+            }
+        },
+        "Router": {
+            "component": "ui/Router",
+            "metadata": {
+                "x": 144,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "Router"
+            }
+        },
+        "ListenWindow": {
+            "component": "interaction/ListenResize",
+            "metadata": {
+                "x": 864,
+                "y": 396,
+                "width": 72,
+                "height": 72,
+                "label": "ListenWindow"
+            }
+        },
+        "core/Output_owsb8": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "core/Output",
+                "x": 1152,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "PrepareStorage",
+                "port": "db"
+            },
+            "tgt": {
+                "process": "ProjectStorage",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "PrepareStorage",
+                "port": "db"
+            },
+            "tgt": {
+                "process": "RuntimeStorage",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "AppView",
+                "port": "event"
+            },
+            "tgt": {
+                "process": "Dispatch",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "UserStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "MainContext",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "ProjectStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 3
+            },
+            "tgt": {
+                "process": "GithubStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 4
+            },
+            "tgt": {
+                "process": "RuntimeStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 5
+            },
+            "tgt": {
+                "process": "ContextStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "missed"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "UserStorage",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "user"
+            }
+        },
+        {
+            "src": {
+                "process": "UserStorage",
+                "port": "user"
+            },
+            "tgt": {
+                "process": "GithubStorage",
+                "port": "user"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectStorage",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "RuntimeStorage",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "GithubStorage",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "RuntimeStorage",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "GithubStorage",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "ProjectStorage",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "MainContext",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "RuntimeStorage",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "ContextStorage",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenHash",
+                "port": "initial"
+            },
+            "tgt": {
+                "process": "Router",
+                "port": "url"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenHash",
+                "port": "change"
+            },
+            "tgt": {
+                "process": "Router",
+                "port": "url"
+            }
+        },
+        {
+            "src": {
+                "process": "Router",
+                "port": "route"
+            },
+            "tgt": {
+                "process": "Dispatch",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenWindow",
+                "port": "width"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "width"
+            }
+        },
+        {
+            "src": {
+                "process": "ListenWindow",
+                "port": "height"
+            },
+            "tgt": {
+                "process": "AppView",
+                "port": "height"
+            }
+        },
+        {
+            "src": {
+                "process": "AppView",
+                "port": "event"
+            },
+            "tgt": {
+                "process": "core/Output_owsb8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "data": "noflo-ui",
+            "tgt": {
+                "process": "PrepareStorage",
+                "port": "name"
+            }
+        },
+        {
+            "data": "user,main,project,github,runtime,context",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "noflo-ui",
+            "tgt": {
+                "process": "AppView",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "ListenWindow",
+                "port": "start"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "UserStorage",
+                "port": "start"
+            }
+        },
+        {
+            "data": "",
+            "tgt": {
+                "process": "ListenHash",
+                "port": "start"
+            }
+        }
+    ]
+}

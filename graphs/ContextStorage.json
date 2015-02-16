@@ -1,0 +1,396 @@
+{
+    "properties": {
+        "name": "ContextStorage",
+        "environment": {}
+    },
+    "inports": {
+        "in": {
+            "process": "Dispatch",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 612,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "context": {
+            "process": "MergeContext",
+            "port": "out",
+            "metadata": {
+                "x": 900,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 144,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "ShowErrors": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 324,
+                "y": 36,
+                "width": 72,
+                "height": 72,
+                "label": "ShowErrors"
+            }
+        },
+        "SplitEdges": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 324,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "SplitEdges"
+            }
+        },
+        "CreateEdgeCtx": {
+            "component": "objects/CreateObject",
+            "metadata": {
+                "x": 468,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "CreateEdgeCtx"
+            }
+        },
+        "SetEdges": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 612,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "SetEdges"
+            }
+        },
+        "MergeContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 756,
+                "y": 252,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContext"
+            }
+        },
+        "SplitNodes": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 324,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "SplitNodes"
+            }
+        },
+        "CreateNodeCtx": {
+            "component": "objects/CreateObject",
+            "metadata": {
+                "x": 468,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "CreateNodeCtx"
+            }
+        },
+        "SetNodes": {
+            "component": "ui/SetToContext",
+            "metadata": {
+                "x": 612,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "SetNodes"
+            }
+        },
+        "GetGraph": {
+            "component": "objects/GetObjectKey",
+            "metadata": {
+                "x": 324,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "GetGraph"
+            }
+        },
+        "FindNodesInGraph": {
+            "component": "ui/FindNodesInGraph",
+            "metadata": {
+                "x": 468,
+                "y": 612,
+                "width": 72,
+                "height": 72,
+                "label": "FindNodesInGraph"
+            }
+        },
+        "GetSearchTerm": {
+            "component": "objects/GetObjectKey",
+            "metadata": {
+                "x": 324,
+                "y": 612,
+                "width": 72,
+                "height": 72,
+                "label": "GetSearchTerm"
+            }
+        },
+        "NodesToContext": {
+            "component": "ui/SearchGraphNodeToContext",
+            "metadata": {
+                "x": 612,
+                "y": 612,
+                "width": 72,
+                "height": 72,
+                "label": "NodesToContext"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "missed"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "SplitEdges",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitEdges",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateEdgeCtx",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateEdgeCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetEdges",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitEdges",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetEdges",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "SetEdges",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "SplitNodes",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitNodes",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateNodeCtx",
+                "port": "start"
+            }
+        },
+        {
+            "src": {
+                "process": "CreateNodeCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetNodes",
+                "port": "context"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitNodes",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "SetNodes",
+                "port": "value"
+            }
+        },
+        {
+            "src": {
+                "process": "SetNodes",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 4
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 5
+            },
+            "tgt": {
+                "process": "GetGraph",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "GetGraph",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "FindNodesInGraph",
+                "port": "graph"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 3
+            },
+            "tgt": {
+                "process": "GetSearchTerm",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "GetSearchTerm",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "FindNodesInGraph",
+                "port": "search"
+            }
+        },
+        {
+            "src": {
+                "process": "FindNodesInGraph",
+                "port": "nodes"
+            },
+            "tgt": {
+                "process": "NodesToContext",
+                "port": "nodes"
+            }
+        },
+        {
+            "src": {
+                "process": "NodesToContext",
+                "port": "context"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "data": "edges,nodes,search_library$,search_graph,search_library_result,graph",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "edges",
+            "tgt": {
+                "process": "SetEdges",
+                "port": "key"
+            }
+        },
+        {
+            "data": "nodes",
+            "tgt": {
+                "process": "SetNodes",
+                "port": "key"
+            }
+        },
+        {
+            "data": "graph",
+            "tgt": {
+                "process": "GetGraph",
+                "port": "key"
+            }
+        },
+        {
+            "data": "search",
+            "tgt": {
+                "process": "GetSearchTerm",
+                "port": "key"
+            }
+        }
+    ]
+}

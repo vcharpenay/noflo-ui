@@ -1,0 +1,561 @@
+{
+    "properties": {
+        "name": "Delete",
+        "environment": {}
+    },
+    "inports": {
+        "db": {
+            "process": "HoldDb",
+            "port": "data",
+            "metadata": {
+                "x": 36,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "in": {
+            "process": "Dispatch",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "out": {
+            "process": "MergeContext",
+            "port": "out",
+            "metadata": {
+                "x": 1512,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "Dispatch": {
+            "component": "routers/GroupRouter",
+            "metadata": {
+                "x": 144,
+                "y": 180,
+                "width": 72,
+                "height": 72,
+                "label": "Dispatch"
+            }
+        },
+        "HoldDb": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 360,
+                "y": 72,
+                "width": 72,
+                "height": 72,
+                "label": "HoldDb"
+            }
+        },
+        "DeleteTransaction": {
+            "component": "indexeddb/BeginTransaction",
+            "metadata": {
+                "x": 828,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "DeleteTransaction"
+            }
+        },
+        "HoldMode": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 648,
+                "y": 144,
+                "width": 72,
+                "height": 72,
+                "label": "HoldMode"
+            }
+        },
+        "StoreName": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 648,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "StoreName"
+            }
+        },
+        "ShowErrors": {
+            "component": "core/Output",
+            "metadata": {
+                "x": 360,
+                "y": 216,
+                "width": 72,
+                "height": 72,
+                "label": "ShowErrors"
+            }
+        },
+        "ComponentStore": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 504,
+                "y": 324,
+                "width": 72,
+                "height": 72,
+                "label": "ComponentStore"
+            }
+        },
+        "SplitComponent": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 360,
+                "y": 360,
+                "width": 72,
+                "height": 72,
+                "label": "SplitComponent"
+            }
+        },
+        "GetKey": {
+            "component": "ui/EnsureId",
+            "metadata": {
+                "x": 504,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "GetKey"
+            }
+        },
+        "GraphStore": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 504,
+                "y": 936,
+                "width": 72,
+                "height": 72,
+                "label": "GraphStore"
+            }
+        },
+        "SplitGraph": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 360,
+                "y": 936,
+                "width": 72,
+                "height": 72,
+                "label": "SplitGraph"
+            }
+        },
+        "ProjectStore": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 504,
+                "y": 792,
+                "width": 72,
+                "height": 72,
+                "label": "ProjectStore"
+            }
+        },
+        "SplitProject": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 360,
+                "y": 648,
+                "width": 72,
+                "height": 72,
+                "label": "SplitProject"
+            }
+        },
+        "RuntimeStore": {
+            "component": "core/Kick",
+            "metadata": {
+                "x": 504,
+                "y": 468,
+                "width": 72,
+                "height": 72,
+                "label": "RuntimeStore"
+            }
+        },
+        "SplitRuntime": {
+            "component": "core/Split",
+            "metadata": {
+                "x": 360,
+                "y": 504,
+                "width": 72,
+                "height": 72,
+                "label": "SplitRuntime"
+            }
+        },
+        "Store": {
+            "component": "indexeddb/GetStore",
+            "metadata": {
+                "x": 972,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "Store"
+            }
+        },
+        "Delete": {
+            "component": "indexeddb/Delete",
+            "metadata": {
+                "x": 1152,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "Delete"
+            }
+        },
+        "ErrorToCtx": {
+            "component": "ui/ErrorToContext",
+            "metadata": {
+                "x": 1260,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "ErrorToCtx"
+            }
+        },
+        "MergeContext": {
+            "component": "core/Merge",
+            "metadata": {
+                "x": 1404,
+                "y": 108,
+                "width": 72,
+                "height": 72,
+                "label": "MergeContext"
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "HoldDb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "DeleteTransaction",
+                "port": "db"
+            }
+        },
+        {
+            "src": {
+                "process": "HoldMode",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "DeleteTransaction",
+                "port": "mode"
+            }
+        },
+        {
+            "src": {
+                "process": "StoreName",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "DeleteTransaction",
+                "port": "stores"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "route"
+            },
+            "tgt": {
+                "process": "HoldDb",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "route"
+            },
+            "tgt": {
+                "process": "HoldMode",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "missed"
+            },
+            "tgt": {
+                "process": "ShowErrors",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ComponentStore",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "StoreName",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 0
+            },
+            "tgt": {
+                "process": "SplitComponent",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitComponent",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "ComponentStore",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitComponent",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GetKey",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "GraphStore",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "StoreName",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 1
+            },
+            "tgt": {
+                "process": "SplitGraph",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitGraph",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GraphStore",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitGraph",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GetKey",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "ProjectStore",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "StoreName",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 2
+            },
+            "tgt": {
+                "process": "SplitProject",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitProject",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "ProjectStore",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitProject",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GetKey",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "RuntimeStore",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "StoreName",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "Dispatch",
+                "port": "out",
+                "index": 3
+            },
+            "tgt": {
+                "process": "SplitRuntime",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitRuntime",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "RuntimeStore",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "SplitRuntime",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "GetKey",
+                "port": "in"
+            }
+        },
+        {
+            "src": {
+                "process": "StoreName",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "Store",
+                "port": "name"
+            }
+        },
+        {
+            "src": {
+                "process": "DeleteTransaction",
+                "port": "transaction"
+            },
+            "tgt": {
+                "process": "Store",
+                "port": "transaction"
+            }
+        },
+        {
+            "src": {
+                "process": "Store",
+                "port": "store"
+            },
+            "tgt": {
+                "process": "Delete",
+                "port": "store"
+            }
+        },
+        {
+            "src": {
+                "process": "GetKey",
+                "port": "id"
+            },
+            "tgt": {
+                "process": "Delete",
+                "port": "key"
+            }
+        },
+        {
+            "src": {
+                "process": "Delete",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "ErrorToCtx",
+                "port": "error"
+            }
+        },
+        {
+            "src": {
+                "process": "ErrorToCtx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "MergeContext",
+                "port": "in"
+            }
+        },
+        {
+            "data": "component,graph,project,runtime",
+            "tgt": {
+                "process": "Dispatch",
+                "port": "routes"
+            }
+        },
+        {
+            "data": "readwrite",
+            "tgt": {
+                "process": "HoldMode",
+                "port": "data"
+            }
+        },
+        {
+            "data": "components",
+            "tgt": {
+                "process": "ComponentStore",
+                "port": "data"
+            }
+        },
+        {
+            "data": "graphs",
+            "tgt": {
+                "process": "GraphStore",
+                "port": "data"
+            }
+        },
+        {
+            "data": "projects",
+            "tgt": {
+                "process": "ProjectStore",
+                "port": "data"
+            }
+        },
+        {
+            "data": "runtimes",
+            "tgt": {
+                "process": "RuntimeStore",
+                "port": "data"
+            }
+        }
+    ]
+}
