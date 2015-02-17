@@ -10,8 +10,8 @@
         "PrepareStorage": {
             "component": "ui/PrepareStorage",
             "metadata": {
-                "x": 576,
-                "y": 36,
+                "x": 540,
+                "y": -36,
                 "width": 72,
                 "height": 72,
                 "label": "PrepareStorage"
@@ -137,12 +137,12 @@
                 "label": "ListenWindow"
             }
         },
-        "core/Output_owsb8": {
+        "core/Output_5umdg": {
             "component": "core/Output",
             "metadata": {
                 "label": "core/Output",
-                "x": 1152,
-                "y": 288,
+                "x": 288,
+                "y": 360,
                 "width": 72,
                 "height": 72
             }
@@ -386,19 +386,6 @@
             }
         },
         {
-            "src": {
-                "process": "AppView",
-                "port": "event"
-            },
-            "tgt": {
-                "process": "core/Output_owsb8",
-                "port": "in"
-            },
-            "metadata": {
-                "route": 0
-            }
-        },
-        {
             "data": "noflo-ui",
             "tgt": {
                 "process": "PrepareStorage",
@@ -438,6 +425,13 @@
             "tgt": {
                 "process": "ListenHash",
                 "port": "start"
+            }
+        },
+        {
+            "data": "ploooop",
+            "tgt": {
+                "process": "core/Output_5umdg",
+                "port": "in"
             }
         }
     ]
