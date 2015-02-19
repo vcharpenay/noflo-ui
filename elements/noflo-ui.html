@@ -303,6 +303,12 @@
           this.$.packets.nodes = this.ctx.nodes;
         }
         if (context.nodes || context.edges) {
+		  console.log(context);
+		  if (context.nodes) {
+		    this.$.library.addNode({
+			  name: 'core/Output'
+			});
+		  }
           return;
         }
         if (context.syncOperation !== undefined) {

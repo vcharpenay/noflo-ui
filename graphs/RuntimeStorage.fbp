@@ -42,6 +42,10 @@ SubscribeGraph RUNTIME -> RUNTIME SendGraph(runtime/SendGraphChanges)
 SubscribeGraph GRAPH -> GRAPH SendGraph
 SubscribeGraph OUT -> IN MergeContext(core/Merge)
 
+SubscribeGraph RUNTIME -> RUNTIME RecvGraph(runtime/RecvGraphChanges)
+SubscribeGraph OUT -> CONTEXT RecvGraph
+RecvGraph OUT -> IN MergeContent
+
 SubscribeGraph RUNTIME -> RUNTIME ListenNetwork(runtime/ListenNetwork)
 SubscribeGraph GRAPH -> GRAPH ListenNetwork
 ListenNetwork PACKET -> PACKET PacketToContext(ui/PacketToContext)
