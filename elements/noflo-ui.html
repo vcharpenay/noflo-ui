@@ -303,14 +303,16 @@
           this.$.packets.nodes = this.ctx.nodes;
         }
         if (context.nodes || context.edges) {
+          return;
+        }
+		if (context.runtimeGraph) {	
 		  console.log(context);
-		  if (context.nodes) {
+		  if (context.runtimeGraph) {
 		    this.$.library.addNode({
 			  name: 'core/Output'
 			});
 		  }
-          return;
-        }
+		}
         if (context.syncOperation !== undefined) {
           this.$.project.confirm(context.syncOperation);
           return;

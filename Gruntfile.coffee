@@ -145,7 +145,7 @@ module.exports = ->
             replacement: process.env.NOFLO_THEME or 'noflo'
           ,
             pattern: /\$NOFLO_USER_LOGIN_ENABLED/ig
-            replacement: process.env.NOFLO_USER_LOGIN_ENABLED or true
+            replacement: process.env.NOFLO_USER_LOGIN_ENABLED or false
           ,
             pattern: /\$NOFLO_OFFLINE_MODE/ig
             replacement: process.env.NOFLO_OFFLINE_MODE or false
