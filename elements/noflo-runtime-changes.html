@@ -1,0 +1,141 @@
+<polymer-element name="noflo-runtime-changes" attributes="editor">
+  <script>
+    Polymer('noflo-runtime-changes', {
+      editor: null,
+      graphs: [],
+      process: function (data) {
+        var graph = null;
+        
+        for (var i = 0; i < this.graphs.length; i++) {
+          if (this.graphs[i].name === data.payload.graph) {
+            graph = this.graphs[i];
+          }
+        }
+        
+        if (!graph) {
+          return;
+        }
+        
+        // data: {command, payload}
+        // FIXME, create separate functions
+        var id, src, tgt, md, prop;
+        if (data.command === 'addnode') {
+          var component = data.payload.component;
+          id = data.payload.id;
+          
+          if (graph.getNode(id) === null) {
+            var pan = this.editor.$.graph.getPan();
+            var scale = this.editor.$.graph.getScale();
+            var width = this.editor.$.graph.width;
+            var height = this.editor.$.graph.height;
+            
+            graph.startTransaction('addnode');
+            
+            graph.addNode(id, component, {
+              label: id,
+              x: (-pan[0] + 334) / scale,
+              y: (-pan[1] + 100) / scale
+            });
+            
+            // TODO take existing nodes into account
+            // TODO add IIPs for default values
+            
+            graph.endTransaction('addnode');
+          }
+        } else if (data.command === 'addedge') {
+          src = data.payload.src;
+          tgt = data.payload.tgt;
+          
+          graph.startTransaction('addedge');
+          
+          // edge uniqueness already checked internally
+          graph.addEdge(src.node, src.port, tgt.node, tgt.port);
+          
+          graph.endTransaction('addedge');
+        } else if (data.command === 'removenode') {
+          id = data.payload.id;
+          
+          graph.startTransaction('removenode');
+          
+          // TODO it also removes connected edges. The runtime
+          // should take changes into account
+          graph.removeNode(id);
+          
+          graph.endTransaction('removenode');
+        } else if (data.command === 'removeedge') {
+          src = data.payload.src;
+          tgt = data.payload.tgt;
+          
+          graph.startTransaction('removeedge');
+          
+          graph.removeEdge(src.node, src.port, tgt.node, tgt.port);
+          
+          graph.endTransaction('removeedge');
+        } else if (data.command === 'changenode') {
+          id = data.payload.id;
+          md = data.payload.metadata;
+          
+          var node = graph.getNode(id);
+          
+          if (node) {
+            // merges current and new metadata
+            // TODO depends on wanted behavior...
+            for (prop in node.metadata) {
+              if (!md[prop]) {
+                md[prop] = node.metadata[prop];
+              }
+            }
+            
+            graph.startTransaction('changenode');
+            
+            graph.setNodeMetadata(id, md);
+            
+            graph.endTransaction('changenode');
+          }
+        } else if (data.command === 'changeedge') {
+          src = data.payload.src;
+          tgt = data.payload.tgt;
+          md = data.payload.metadata;
+          
+          var edge = graph.getEdge(src.node, src.port, tgt.node, tgt.port);
+          
+          if (edge) {
+            // merges current and new metadata
+            // TODO depends on wanted behavior...
+            for (prop in edge.metadata) {
+              if (!md[prop]) {
+                md[prop] = edge.metadata[prop];
+              }
+            }
+            
+            graph.startTransaction('changeedge');
+            
+            graph.setEdgeMetadata(src.node, src.port, tgt.node, tgt.por, md);
+            
+            graph.endTransaction('changeedge');
+          }
+        } else if (data.command === 'addgroup') {
+          src = data.payload.group;
+          tgt = data.payload.nodes;
+          md = data.payload.metadata;
+          
+          graph.startTransaction('addgroup');
+          
+          graph.addGroup(group, nodes, md);
+          
+          graph.endTransaction('addgroup');
+        } else if (data.command === 'removegroup') {
+          id = data.payload.name;
+          
+          graph.startTransaction('removegroup');
+          
+          graph.removeNode(name);
+          
+          graph.endTransaction('removegroup');
+        } else if (data.command === 'clear') {
+          // TODO
+        }
+      }
+    });
+  </script>
+</polymer-element>

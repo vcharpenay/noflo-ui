@@ -3,6 +3,7 @@
 <link rel="import" href="noflo-library.html">
 <link rel="import" href="noflo-context.html">
 <link rel="import" href="noflo-runtime.html">
+<link rel="import" href="noflo-runtime-changes.html">
 <link rel="import" href="noflo-journal.html">
 <link rel="import" href="noflo-component-editor.html">
 <link rel="import" href="noflo-search.html">
@@ -45,6 +46,7 @@
     <noflo-main id="main"></noflo-main>
     <the-graph-editor id="grapheditor" width="{{ width }}" height="{{ height }}"></the-graph-editor>
     <noflo-library id="library"></noflo-library>
+    <noflo-runtime-changes id="runtimeChanges"></noflo-runtime-changes>
     <noflo-context id="context"></noflo-context>
     <noflo-runtime id="runtime"></noflo-runtime>
     <noflo-journal id="journal"></noflo-journal>
@@ -229,6 +231,7 @@
           }
         }.bind(this));
         this.$.library.editor = this.$.grapheditor;
+        this.$.runtimeChanges.editor = this.$.grapheditor;
         this.$.journal.editor = this.$.grapheditor;
         this.$.context.editor = this.$.grapheditor;
         this.$.packets.editor = this.$.grapheditor;
@@ -305,13 +308,8 @@
         if (context.nodes || context.edges) {
           return;
         }
-		if (context.runtimeGraph) {	
-		  console.log(context);
-		  if (context.runtimeGraph) {
-		    this.$.library.addNode({
-			  name: 'core/Output'
-			});
-		  }
+		if (context.runtimeGraph) {
+		  this.$.runtimeChanges.process(context.runtimeGraph);
 		}
         if (context.syncOperation !== undefined) {
           this.$.project.confirm(context.syncOperation);
@@ -366,6 +364,7 @@
         if (this.ctx.graphs) {
           this.$.context.graphs = this.ctx.graphs;
           this.$.library.graphs = this.ctx.graphs;
+          this.$.runtimeChanges.graphs = this.ctx.graphs;
           this.$.project.graphs = this.ctx.graphs;
           this.$.search.graphs = this.ctx.graphs;
         }
