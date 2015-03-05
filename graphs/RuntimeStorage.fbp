@@ -43,7 +43,7 @@ SubscribeGraph GRAPH -> GRAPH SendGraph
 SubscribeGraph OUT -> IN MergeContext(core/Merge)
 
 SubscribeGraph RUNTIME -> RUNTIME RecvGraph(runtime/RecvGraphChanges)
-RecvGraph RECEIVED -> BLANK SendGraph
+RecvGraph OUT -> BLANK SendGraph
 RecvGraph OUT -> IN MergeContext
 
 SubscribeGraph RUNTIME -> RUNTIME ListenNetwork(runtime/ListenNetwork)
